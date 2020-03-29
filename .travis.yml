@@ -21,42 +21,42 @@ matrix:
       - android-sdk-preview-license-.+
       - android-sdk-license-.+
       - google-gdk-license-.+
-      before_cache:
-      - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
-      - rm -f  $HOME/.gradle/caches/transforms-1/transforms-1.lock
-      - rm -rf $HOME/.gradle/caches/3.5/fileHashes/
-      - rm -rf $HOME/.gradle/caches/*/plugin-resolution/
-      cache:
-        directories:
-        - "$HOME/.gradle/caches/"
-        - "$HOME/.gradle/wrapper/"
-      before_install:
-      - export LANG=en_US.UTF-8
-      - nvm install 10.17.0
-      - yes | sdkmanager "platforms;android-27"
-      - cd $TRAVIS_BUILD_DIR
-      - gem install fir-cli
-      - rm -rf ./release/android/*.apk
-      - npm install -g ionic@5.4.11 cordova@8.1.2 cordova-res
-      script:
-      - npm i
-      - ionic cordova platform add android
-      - ionic cordova build android --prod --release
-      - jarsigner -verbose -sigalg SHA256withRSA -digestalg SHA1 -keystore ./ionic.keystore -storepass ionicionic -signedjar ./release/android/app-release-signed.apk ./platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk ionic.keystore
-      - cd $TRAVIS_BUILD_DIR
-      - git config --local user.name "victorwang0526"
-      - git config --local user.email "fengxuanwang@qq.com"
-      - export TRAVIS_TAG=${TRAVIS_TAG:-$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)-android}
-      - git tag $TRAVIS_TAG
-      - git tag
-  #    - fir login 1a8cdbd33bf403f19177476ca7f5cec0
-  #    - fir me
-  #    - fir publish ./release/android/app-release-signed.apk
-      deploy:
-        provider: releases
-        skip_cleanup: true
-        api_key: $GH_TOKEN
-        file_glob: true
-        file: $TRAVIS_BUILD_DIR/release/android/app-release-signed.apk
-        on:
-          tags: true
+before_cache:
+  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -f  $HOME/.gradle/caches/transforms-1/transforms-1.lock
+  - rm -rf $HOME/.gradle/caches/3.5/fileHashes/
+  - rm -rf $HOME/.gradle/caches/*/plugin-resolution/
+cache:
+  directories:
+    - "$HOME/.gradle/caches/"
+    - "$HOME/.gradle/wrapper/"
+before_install:
+  - export LANG=en_US.UTF-8
+  - nvm install 10.17.0
+  - yes | sdkmanager "platforms;android-27"
+  - cd $TRAVIS_BUILD_DIR
+  - gem install fir-cli
+  - rm -rf ./release/android/*.apk
+  - npm install -g ionic@5.4.11 cordova@8.1.2 cordova-res
+script:
+  - npm i
+  - ionic cordova platform add android
+  - ionic cordova build android --prod --release
+  - jarsigner -verbose -sigalg SHA256withRSA -digestalg SHA1 -keystore ./ionic.keystore -storepass ionicionic -signedjar ./release/android/app-release-signed.apk ./platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk ionic.keystore
+  - cd $TRAVIS_BUILD_DIR
+  - git config --local user.name "victorwang0526"
+  - git config --local user.email "fengxuanwang@qq.com"
+  - export TRAVIS_TAG=${TRAVIS_TAG:-$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)-android}
+  - git tag $TRAVIS_TAG
+  - git tag
+#    - fir login 1a8cdbd33bf403f19177476ca7f5cec0
+#    - fir me
+#    - fir publish ./release/android/app-release-signed.apk
+deploy:
+  provider: releases
+  skip_cleanup: true
+  api_key: $GH_TOKEN
+  file_glob: true
+  file: $TRAVIS_BUILD_DIR/release/android/app-release-signed.apk
+  on:
+    tags: true
