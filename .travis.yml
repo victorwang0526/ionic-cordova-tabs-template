@@ -37,7 +37,7 @@ matrix:
       - cd $TRAVIS_BUILD_DIR
       - gem install fir-cli
       - rm -rf ./release/android/*.apk
-      - npm install -g ionic@5.4.11
+      - npm install -g ionic@5.4.11 cordova@8.1.2
       script:
       - npm i
       - ionic cordova platform add android
