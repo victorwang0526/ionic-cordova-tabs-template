@@ -29,3 +29,11 @@ $ ionic cordova build android --prod --release
 
 $ jarsigner -verbose -sigalg SHA256withRSA -digestalg SHA1 -keystore ./ionic.keystore -storepass ionicionic -signedjar ./release/android/app-release-signed.apk ./platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk ionic.keystore
 ```
+
+```shell script
+$ ionic cordova platform add ios
+
+$ ionic cordova build ios --prod --release
+
+
+```
