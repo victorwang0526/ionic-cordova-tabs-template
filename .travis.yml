@@ -42,7 +42,8 @@ before_install:
   - npm install -g ionic@5.4.11 cordova@8.1.2 cordova-res
 script:
   - npm i
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then ./travis/build-android.sh && ./travis/package-android.sh ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ./travis/build-ios.sh ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then ./travis/build-android.sh ; fi
   - cd $TRAVIS_BUILD_DIR
   - git config --local user.name "victorwang0526"
   - git config --local user.email "fengxuanwang@qq.com"
