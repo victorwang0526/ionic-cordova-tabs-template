@@ -47,12 +47,12 @@ script:
   - npm i
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ./travis/build-ios.sh ; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then ./travis/build-android.sh ; fi
-#  - cd $TRAVIS_BUILD_DIR
-#  - git config --local user.name "victorwang0526"
-#  - git config --local user.email "fengxuanwang@qq.com"
-#  - export TRAVIS_TAG=${TRAVIS_TAG:-$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)}
-#  - git tag $TRAVIS_TAG
-#  - git tag
+  - cd $TRAVIS_BUILD_DIR
+  - git config --local user.name "victorwang0526"
+  - git config --local user.email "fengxuanwang@qq.com"
+  - export TRAVIS_TAG=${TRAVIS_TAG:-$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)}
+  - git tag $TRAVIS_TAG
+  - git tag
 #    - fir login 1a8cdbd33bf403f19177476ca7f5cec0
 #    - fir me
 #    - fir publish ./release/android/app-release-signed.apk
