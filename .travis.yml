@@ -40,6 +40,8 @@ before_install:
   - cd $TRAVIS_BUILD_DIR
   - gem install fir-cli
   - npm install -g ionic@5.4.11 cordova@8.1.2 cordova-res
+before_script:
+  - chmod +x ./travis/*.sh
 script:
   - npm i
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ./travis/build-ios.sh ; fi
