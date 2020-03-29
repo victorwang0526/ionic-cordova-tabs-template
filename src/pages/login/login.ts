@@ -3,6 +3,7 @@ import { AlertController, LoadingController, NavController, NavParams } from 'io
 import { Storage } from '@ionic/storage';
 import {BarcodeScanner} from "@ionic-native/barcode-scanner";
 import {UserProvider} from "../../providers/user/user";
+import {TabsPage} from "../tabs/tabs";
 
 @Component({
   selector: 'page-login',
@@ -33,6 +34,8 @@ export class LoginPage {
           this.alertCtrl.create({title: res.errorMessage}).present({});
           return;
         }
+        this.storage.set('user', res.data);
+        this.navCtrl.setRoot(TabsPage);
       }, error => {
         this.alertCtrl.create({message: JSON.stringify(error)}).present({});
       }, () => {
