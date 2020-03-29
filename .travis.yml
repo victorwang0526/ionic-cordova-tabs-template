@@ -37,7 +37,7 @@ matrix:
       - cd $TRAVIS_BUILD_DIR
       - gem install fir-cli
       - rm -rf ./release/android/*.apk
-      - npm install -g ionic@5.4.11 cordova@8.1.2
+      - npm install -g ionic@5.4.11 cordova@8.1.2 cordova-res
       script:
       - npm i
       - ionic cordova platform add android
@@ -57,6 +57,6 @@ matrix:
         skip_cleanup: true
         api_key: $GH_TOKEN
         file_glob: true
-        file: /home/travis/build/victorwang0526/ionic-preset-vue-ts/release/android/app-release-signed.apk
+        file: $TRAVIS_BUILD_DIR/release/android/app-release-signed.apk
         on:
           tags: true
